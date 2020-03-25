@@ -15,7 +15,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
 
-    private lateinit var scannerView: ZXingAutofocusScannerView
+    lateinit var scannerView: me.dm7.barcodescanner.zxing.ZXingScannerView
     private lateinit var config: Protos.Configuration
 
     companion object {
@@ -32,8 +32,10 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         config = Protos.Configuration.parseFrom(intent.extras!!.getByteArray(EXTRA_CONFIG))
 
         title = ""
-        scannerView = ZXingAutofocusScannerView(this)
+        scannerView = ZXingScannerView(this)
         scannerView.setAutoFocus(true)
+        // this paramter will make your HUAWEI phone works great!
+        scannerView.setAspectTolerance(0.5f)
 
         val restrictedFormats = mapRestrictedBarcodeTypes()
         if (restrictedFormats.isNotEmpty()) {
