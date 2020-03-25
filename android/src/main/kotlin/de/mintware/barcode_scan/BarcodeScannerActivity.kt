@@ -65,7 +65,6 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val buttonText = if (scannerView.flash) config.flashOffText else config.flashOnText
         val item = menu.add(0, TOGGLE_FLASH, 0, buttonText)
-        
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
         val item2 = menu.add(1, CANCEL_BUTTON, 1, "Cancel")
          item2.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
@@ -79,9 +78,8 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
             return true
         }
          if (item.itemId == CANCEL_BUTTON) {
-             val intent = Intent()
-            setResult(RESULT_CANCELED, intent)
             finish()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
